@@ -56,6 +56,9 @@ type Message struct {
 	// Apple Push Notification Service specific options.
 	Apns *ApnsConfig `json:"apns,omitempty"`
 
+	// FCM options
+	FCMOptions *Options `json:"fcm_options,omitempty"`
+
 	// Webpush protocol options.
 	Webpush *WebpushConfig `json:"webpush,omitempty"`
 
