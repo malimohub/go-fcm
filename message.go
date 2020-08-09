@@ -3,6 +3,7 @@ package fcm
 import (
 	"encoding/json"
 	"errors"
+	"log"
 	"strings"
 	"time"
 )
@@ -91,7 +92,7 @@ func (msg *Message) Validate() error {
 	}
 
 	var targets = 0
-	// validate target: `topic` or `condition`, or `token`
+	// validate target: `topic` or `condition`, or `token`, or fcm options
 	if msg.Topic != "" {
 		targets = targets + 1
 	}
@@ -102,6 +103,7 @@ func (msg *Message) Validate() error {
 
 	opCnt := strings.Count(msg.Condition, "&&") + strings.Count(msg.Condition, "||")
 	if opCnt > 2 {
+		log.Print("here erroring on condition")
 		return ErrInvalidTarget
 	}
 
@@ -110,6 +112,7 @@ func (msg *Message) Validate() error {
 	}
 
 	if targets == 0 || targets > 1 {
+		log.Print("here with too many targets")
 		return ErrInvalidTarget
 	}
 
