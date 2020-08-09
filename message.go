@@ -3,7 +3,6 @@ package fcm
 import (
 	"encoding/json"
 	"errors"
-	"log"
 	"strings"
 	"time"
 )
@@ -103,7 +102,6 @@ func (msg *Message) Validate() error {
 
 	opCnt := strings.Count(msg.Condition, "&&") + strings.Count(msg.Condition, "||")
 	if opCnt > 2 {
-		log.Print("here erroring on condition")
 		return ErrInvalidTarget
 	}
 
@@ -111,10 +109,9 @@ func (msg *Message) Validate() error {
 		targets = targets + 1
 	}
 
-	/*if targets == 0 || targets > 1 {
-		log.Print("here with too many targets")
+	if targets == 0 || targets > 1 {
 		return ErrInvalidTarget
-	}*/
+	}
 
 	if msg.Android != nil && msg.Android.TTL != "" {
 		if _, err := time.ParseDuration(msg.Android.TTL); err != nil {
