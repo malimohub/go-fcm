@@ -111,10 +111,10 @@ func (msg *Message) Validate() error {
 		targets = targets + 1
 	}
 
-	if targets == 0 || targets > 1 {
+	/*if targets == 0 || targets > 1 {
 		log.Print("here with too many targets")
 		return ErrInvalidTarget
-	}
+	}*/
 
 	if msg.Android != nil && msg.Android.TTL != "" {
 		if _, err := time.ParseDuration(msg.Android.TTL); err != nil {
